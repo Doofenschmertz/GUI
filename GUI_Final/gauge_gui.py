@@ -184,6 +184,7 @@ class MainWindow(QWidget):
         self.setWindowTitle('Analog Gauges with Indicators')
         self.setGeometry(0, 0, 800, 600)  # Initial size before fullscreen
 
+        self.showMaximized() 
         # Calculate screen dimensions
         screen = QDesktopWidget().screenGeometry()
         self.setGeometry(screen)
