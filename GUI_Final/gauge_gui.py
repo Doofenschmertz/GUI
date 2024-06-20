@@ -79,6 +79,22 @@ class Gauge(QWidget):
                 tick_x = math.cos(math.radians(angle)) * radius * 0.76
                 tick_y = -math.sin(math.radians(angle)) * radius * 0.76
             painter.drawLine(QPointF(tick_x, tick_y), QPointF(x, y))
+            
+            if i == self.min_value or i== self.max_value:
+                continue
+
+        num_intervals = 80
+
+        if self.gauge_or_rpm:
+            num_intervals = 100
+        
+        for j in range(1, num_intervals ):
+            small_angle = 240 - j * (240 / num_intervals)
+            x_small = math.cos(math.radians(small_angle)) * radius * 0.8
+            y_small = -math.sin(math.radians(small_angle)) * radius * 0.8
+            tick_x_small = math.cos(math.radians(small_angle)) * radius * 0.79  # Adjust small notch length as needed
+            tick_y_small = -math.sin(math.radians(small_angle)) * radius * 0.79  # Adjust small notch length as needed
+            painter.drawLine(QPointF(tick_x_small, tick_y_small), QPointF(x_small, y_small))
 
         # Draw needle
         needle_angle = 240 - ((self.value - self.min_value) * 240 / (self.max_value - self.min_value))
